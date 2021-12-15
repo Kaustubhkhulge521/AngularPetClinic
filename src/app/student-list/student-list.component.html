@@ -1,0 +1,145 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 style="text-align: center">Pet Table</h1><br>
+        <button (click)="updateStudent(student.petId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Update</button>&nbsp;
+
+        <div class="row" [hidden]="!deleteMessage">
+
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+
+    <div class="panel-body">
+        <table class="table table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead class="thead-light">
+                <tr>
+                    <th>Sr No</th>
+                    <th>Pet Name</th>
+                    <th>Owner Name</th>
+                    <th>Pet Species</th>
+                    <th>Pet Symptoms</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students ">
+                    <td>{{student.petId}}</td>
+                    <td>{{student.petName}}</td>
+                    <td>{{student.ownerName}}</td>
+                    <td>{{student.petSpecies}}</td>
+                    <td>{{student.petSymptoms}}</td>
+                    <td><button (click)="deleteStudent(student.petId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                        <button (click)="updateStudent(student.petId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Update</button>&nbsp;
+                        <button (click)="updateStudent(student.petId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Add Desc</button>
+                    </td>
+                </tr>
+            </tbody><br>
+        </table>
+    </div>
+</div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="studentupdateform" #updstu (ngSubmit)="updateStu(updstu)">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align: center">Update Pet Table</h4>
+
+                </div>
+
+                <div class="modal-body">
+                    <div [hidden]="false">
+
+                        <input type="hidden" class="form-control" formControlName="petId" [(ngModel)]="updatedList.petId">
+                        <div class="form-group">
+                            <label for="name">Pet Name</label>
+                            <input type="text" class="form-control" formControlName="petName" [(ngModel)]="updatedList.petName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Owner Name</label>
+                            <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="updatedList.ownerName">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Pet Species</label>
+                            <input type="text" class="form-control" formControlName="petSpecies" [(ngModel)]="updatedList.petSpecies">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Pet Symptoms</label>
+                            <input type="text" class="form-control" formControlName="petSymptoms" [(ngModel)]="updatedList.petSymptoms">
+                        </div>
+
+
+                    </div>
+                    <div [hidden]="true">
+                        <h4>Pet Detail Updated!</h4>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [hidden]="false">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--<div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+             <form [formGroup]="studentupdateform" #updstu (ngSubmit)="updateStu(updstu)">
+          
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center">Update Pet Table</h4>
+              
+            </div>
+           
+            <div class="modal-body"  >
+                <div [hidden]="false">
+
+                    <input type="hidden" class="form-control"  formControlName="petId" [(ngModel)]="studentlist.petId">
+                            <div class="form-group">
+                                <label for="name">Pet Name</label>
+                                <input type="text" class="form-control"  formControlName="petName" [(ngModel)]="studentlist.petName"  >
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="name">Owner Name</label>
+                                <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="studentlist.ownerName">
+                            </div>
+                            <div class="form-group">
+                              <label for="name">Pet Species</label>
+                              <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="studentlist.petSpecies">
+                          </div>
+                          <div class="form-group">
+                            <label for="name">Pet Symptoms</label>
+                            <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="studentlist.petSymptoms">
+                        </div>
+                    
+                           
+                  </div>  
+                  <div [hidden]="true">
+                      <h4>Pet Detail Updated!</h4>
+                  </div>        
+                    
+            </div>
+            
+         
+            <div class="modal-footer" >
+              <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+            </div>
+            
+        </form>
+          </div>
+        </div>
+      </div>-->

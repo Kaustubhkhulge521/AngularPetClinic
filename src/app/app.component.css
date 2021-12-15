@@ -1,0 +1,28 @@
+body,
+html,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 0;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+    font-family: Sans-Serif;
+}
+
+.lead-in {
+    padding-top: 30vh;
+    text-align: center;
+}
+
+.masthead {
+    height: auto;
+    min-height: 100vh;
+    background-image: url("C:\Users\kaustubh\Downloads\kk.jpg");
+    background-size: cover;
+    background-position: center;
+}

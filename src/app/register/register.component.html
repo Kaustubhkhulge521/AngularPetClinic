@@ -1,0 +1,215 @@
+<div class="bg"></div>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input id="Doctor" type="radio" (change)="change($event)" class="custom-control-input" value="Doctor" name="Login" formControlName="Login">
+            <label class="custom-control-label" layout-align="center left" for="Doctor">Register for Doctor</label> </div>
+
+        <!-- Default inline 2-->
+        <div class="custom-control custom-radio custom-control-inline" layout-align="center center">
+            <input id="Owner" type="radio" (change)="change($event)" class="custom-control-input" value="Owner" name="Login" formControlName="Login">
+            <label class="custom-control-label" for="Owner">Register For Owner</label> </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+<form [formGroup]="form" style="max-width: 900px; height: auto; background-color: white; margin-left: 6cm;" *ngIf="showForOwner" #registerform (ngSubmit)="register(registerform)">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">First Name</label> <input type="text" class="form-control" formControlName="firstName" aria-describedby="emailHelp" placeholder="Enter First Name">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.firstName.touched || submitted) && registerFormControl.firstName.errors?.required">
+                                First Name is required
+                            </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Last Name" formControlName="lastName">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.lastName.touched || submitted) && registerFormControl.lastName.errors?.required">
+                    Last Name is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1"> Email</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email" formControlName="email">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+                    Email is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Mobile Number</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Mobile Number" formControlName="mobileNumber">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.mobileNumber.touched || submitted) && registerFormControl.mobileNumber.errors?.required">
+                    Mobile Number is required
+                </span>
+                
+            </div>
+        </div>
+
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Username" formControlName="username">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+                    Username is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password" formControlName="password">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                    Password is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</form>
+<form [formGroup]="form" style="max-width: 900px; height: auto; background-color: white; margin-left: 6cm;" *ngIf="show" #registerDoctorform (ngSubmit)="registerDoctor(registerDoctorform)">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label> <input type="text" class="form-control" formControlName="name" aria-describedby="emailHelp" placeholder="EnterName">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors.required">
+                    Name is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Designation</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Designation" formControlName="designation">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.designation.touched || submitted) && registerFormControl.designation.errors?.required">
+                    Designation is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1"> Address</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Address" formControlName="address">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.designation.touched || submitted) && registerFormControl.designation.errors?.required">
+                    Designation is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Mobile Number</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Mobile Number" formControlName="mobileNumber">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.mobileNumber.touched || submitted) && registerFormControl.mobileNumber.errors?.required">
+                    Mobile Number is required
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Qualification</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Qualification" formControlName="qualification">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.qualification.touched || submitted) && registerFormControl.qualification.errors?.required">
+                    Qualification is required
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Username" formControlName="username">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+                    Username is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label> <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password" formControlName="password">
+                <!--  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                <span class="text-danger" *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                    Password is required
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</form>
