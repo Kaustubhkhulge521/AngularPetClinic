@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../student.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
 import { Student } from '../student';
-import { Observable,Subject } from "rxjs";
-
-import {FormControl,FormGroup,Validators} from '@angular/forms';
+import { StudentService } from '../student.service';
 
 @Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css']
+  selector: 'app-view-pet',
+  templateUrl: './view-pet.component.html',
+  styleUrls: ['./view-pet.component.css']
 })
-export class StudentListComponent implements OnInit {
+export class ViewPetComponent implements OnInit {
 
- constructor(private studentservice:StudentService) { }
+  constructor(private studentservice:StudentService) { }
   studentsArray: any[] = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any>= new Subject();
@@ -51,18 +50,7 @@ export class StudentListComponent implements OnInit {
         error => console.log(error));
   }
 
-  insertPet(student) {
-    this.studentservice.insertPet(student)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.deleteMessage=true;
-          this.studentservice.getDoctorList().subscribe(data =>{
-            this.students =data
-            })
-        },
-        error => console.log(error));
-  }
+
   updateStudent(id: number){
     console.log(id);
     this.studentservice.getStudent(id)
@@ -83,16 +71,7 @@ export class StudentListComponent implements OnInit {
     petSpecies:new FormControl(),
     petSymptoms:new FormControl()
   });
-  PetToupdated = {
-    petId:"",
-    ownerName: "",
-    petName:"",
-    speciesId: "",
-    petSpecies: "",
-    petSymptoms: "",
-    
-    
-  };
+
   updateStu(updstu){
     this.student=new Student(); 
    this.student.petId=this.petId.value;
@@ -123,41 +102,24 @@ export class StudentListComponent implements OnInit {
   get ownerName(){
     return this.studentupdateform.get('ownerName');
   }
-  get speciesId(){
-    return this.studentupdateform.get('speciesId');
+  get StudentName(){
+    return this.studentupdateform.get('student_name');
   }
-  
+
+  get StudentEmail(){
+    return this.studentupdateform.get('student_email');
+  }
+
+  get StudentBranch(){
+    return this.studentupdateform.get('student_branch');
+  }
+
+  get StudentId(){
+    return this.studentupdateform.get('student_id');
+  }
+
   changeisUpdate(){
     this.isupdated=false;
   }
-  edit(student){
-    this.PetToupdated= student;
-  }
-  updateToPet2(){
-    this.studentservice.updatePet2(this.PetToupdated).subscribe(
-      (resp) =>{
-        console.log(resp);
-      },
-      (err) =>{
-        console.log(err);
-      }
-    );
-    }
-    deletePet(id: number) {
-     console.log(
-        id
-      );
-      
-      this.studentservice.deletePet(id)
-        .subscribe(
-          data => {
-            console.log(data);
-            this.deleteMessage=true;
-            this.studentservice.getStudentList().subscribe(data =>{
-              this.students =data
-              })
-          },
-          error => console.log(error));
-    }
-  
+
 }

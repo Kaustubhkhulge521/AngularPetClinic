@@ -1,0 +1,42 @@
+
+<br>
+<a routerLink="/view-Owner" style="text-align:left;" class="nav-link"  class="btn btn-primary" >Back To Owner</a>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h1 style="text-align: center">Description Table</h1><br>
+      
+     
+
+  
+  <div class="panel-body">
+      <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"  >
+          <thead class="thead-light">
+              <tr>
+                <th>PetId</th>
+              
+                  <th>PetName</th>
+                  <th>SpeciesId</th>
+                  <th>PetBreed</th>
+                  <th>PetDisease</th>
+                  <th>Medicine</th>
+                  <th>MedicineDose</th>
+                  
+                  
+              </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let student of students ">
+                <td>{{student.petId}}</td>
+                <td>{{student.petName}}</td>
+                  <td>{{student.speciesId}}</td>
+                  <td>{{student.petBreed}}</td>
+                  <td>{{student.petDisease}}</td>
+                  <td>{{student.medicine}}</td>
+                  <td>{{student.medicineDose}}</td>
+                  
+                  
+                  
+                  

@@ -20,7 +20,8 @@ export class AddStudentComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
-    selected:string;    
+    selected:string; 
+     response:string;    
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -46,7 +47,8 @@ export class AddStudentComponent implements OnInit {
 
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
-    changeLoger(e)
+    
+    change(e)
     {
        this.selected=e.target.value;
 
@@ -60,17 +62,28 @@ export class AddStudentComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+         this.authenticationService.login(this.f.username.value, this.f.password.value, this.selected)
             .pipe(first())
             .subscribe(
                 data => {
-                    //this.router.navigate([this.returnUrl]);
-                    this.router.navigateByUrl('/view-Pet')
-
+                  this.response=data;
+                  if(this.response=='Doctor login Successfully')
+                  {
+                    console.log(this.response); 
+                    this.router.navigateByUrl('/view-Doctor')
+                  }else if(this.response=='Owner login Successfully'){
+                    console.log(this.response); 
+                    this.router.navigateByUrl('/view-Owner')
+                  }else{
+                      alert("user not found");
+                  }
+                   
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    
+       
     }
 }

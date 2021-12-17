@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { from } from 'rxjs';
-import { Partner } from '../partner';
-import { PartnerService } from '../partner.service';
+
 import { RegisterUserService } from '../register-user.service';
 import { registeruser } from '../register-user';
 import { registerDoctor } from '../register-doctor';

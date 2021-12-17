@@ -1,6 +1,7 @@
 
 <form [formGroup]="loginForm" style="width: auto; margin-top: 2cm;  height: auto; border-collapse: unset; margin-left: 23cm; " (ngSubmit)="onSubmit()" >
     <h2 style="max-width: 350px; margin-left: 0.2cm;">Login</h2>
+    
     <div class="form-group">
         <label for="username" style="max-width: 350px; margin-left: 0.2cm;">Username</label>
         <input type="text" style="max-width: 350px; margin-left: 0.2cm;" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
@@ -14,6 +15,15 @@
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
         </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Select Login</label>
+          <select class="form-control" (change)="change($event)" style="max-width: 350px; margin-left: 0.2cm;"  required>                                   
+            <option value="Option" [selected]="true">Select Login</option>
+            <option value="Doctor" [selected]="'Doctor' == Doctor">Login For Doctor</option>
+            <option value="Owner" [selected]="'Owner' == Owner">Login For Owner</option>
+            </select>                               
     </div>
     
     <div class="form-group">

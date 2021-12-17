@@ -1,145 +1,121 @@
+
+<!--<br>
+<a routerLink="/view-Owner" style="text-align:left;" class="nav-link"  class="btn btn-primary" >Back To Owner</a>
+<br>-->
+
+
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h1 style="text-align: center">Pet Table</h1><br>
-        <button (click)="updateStudent(student.petId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Update</button>&nbsp;
+  <div class="panel-heading">
+      <h1 style="text-align: center">Pet Table</h1><br>
+      
+      <div class="form-group">
+        <a routerLink="/view-Owner" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;" class="nav-link"  class="btn btn-primary" >Back To Owner</a>
 
-        <div class="row" [hidden]="!deleteMessage">
-
-            <div class="col-sm-8"></div>
-            <div class="col-sm-4">
-
-            </div>
-            <div class="col-sm-4"></div>
-        </div>
-    </div>
-
-
-    <div class="panel-body">
-        <table class="table table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-            <thead class="thead-light">
-                <tr>
-                    <th>Sr No</th>
-                    <th>Pet Name</th>
-                    <th>Owner Name</th>
-                    <th>Pet Species</th>
-                    <th>Pet Symptoms</th>
-                    <th>Action</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let student of students ">
-                    <td>{{student.petId}}</td>
-                    <td>{{student.petName}}</td>
-                    <td>{{student.ownerName}}</td>
-                    <td>{{student.petSpecies}}</td>
-                    <td>{{student.petSymptoms}}</td>
-                    <td><button (click)="deleteStudent(student.petId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
-                        <button (click)="updateStudent(student.petId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Update</button>&nbsp;
-                        <button (click)="updateStudent(student.petId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Add Desc</button>
-                    </td>
-                </tr>
-            </tbody><br>
-        </table>
-    </div>
-</div>
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form [formGroup]="studentupdateform" #updstu (ngSubmit)="updateStu(updstu)">
-
-                <div class="modal-header">
-                    <h4 class="modal-title" style="text-align: center">Update Pet Table</h4>
-
-                </div>
-
-                <div class="modal-body">
-                    <div [hidden]="false">
-
-                        <input type="hidden" class="form-control" formControlName="petId" [(ngModel)]="updatedList.petId">
-                        <div class="form-group">
-                            <label for="name">Pet Name</label>
-                            <input type="text" class="form-control" formControlName="petName" [(ngModel)]="updatedList.petName">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Owner Name</label>
-                            <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="updatedList.ownerName">
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Pet Species</label>
-                            <input type="text" class="form-control" formControlName="petSpecies" [(ngModel)]="updatedList.petSpecies">
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Pet Symptoms</label>
-                            <input type="text" class="form-control" formControlName="petSymptoms" [(ngModel)]="updatedList.petSymptoms">
-                        </div>
-
-
-                    </div>
-                    <div [hidden]="true">
-                        <h4>Pet Detail Updated!</h4>
-                    </div>
-
-                </div>
-
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" [hidden]="false">Update</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
-<!--<div class="modal" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-             <form [formGroup]="studentupdateform" #updstu (ngSubmit)="updateStu(updstu)">
-          
-            <div class="modal-header">
-              <h4 class="modal-title" style="text-align: center">Update Pet Table</h4>
-              
-            </div>
+        
+      <button [disabled]="loading" data-toggle="modal" data-target="#exampleModal" (click) = "insertPet(student)" class="btn btn-primary" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;">
+        InsertPet
+    </button>
+      
+    <!--<td> <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "insertPet(student)">Insert Pet</button>&nbsp;
+    -->
+  
+  <div class="panel-body">
+      <table  style= "width: 32cm;" class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"  >
+          <thead class="thead-light">
+              <tr>
+                <th>PetId</th>
+                  <th>OwnerName</th>
+                  <th>PetName</th>
+                  <th>speciesId</th>
+                  <th>PetSpecies</th>
+                  <th>PetSymptoms</th>
+                 <th>Action</th>
+                  
+              </tr>
            
-            <div class="modal-body"  >
-                <div [hidden]="false">
+          </thead>
+          <tbody>
+               <tr *ngFor="let student of students ">
+                <td>{{student.petId}}</td>
+                <td>{{student.ownerName}}</td>
+                <td>{{student.petName}}</td>
+                  <td>{{student.speciesId}}</td>
+                  <td>{{student.petSpecies}}</td>
+                  <td>{{student.petSymptoms}}</td>
+                 
+                  
+                  
+                  
+                  <td>
+                    <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "edit(student)">Edit</button>&nbsp;
+                    <button (click)="deletePet(student.petId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>
+                  </td>
+                </tr>
+          </tbody><br>
+      </table>
+  </div>
+</div> 
 
-                    <input type="hidden" class="form-control"  formControlName="petId" [(ngModel)]="studentlist.petId">
-                            <div class="form-group">
-                                <label for="name">Pet Name</label>
-                                <input type="text" class="form-control"  formControlName="petName" [(ngModel)]="studentlist.petName"  >
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="name">Owner Name</label>
-                                <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="studentlist.ownerName">
-                            </div>
-                            <div class="form-group">
-                              <label for="name">Pet Species</label>
-                              <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="studentlist.petSpecies">
-                          </div>
-                          <div class="form-group">
-                            <label for="name">Pet Symptoms</label>
-                            <input type="text" class="form-control" formControlName="ownerName" [(ngModel)]="studentlist.petSymptoms">
-                        </div>
-                    
-                           
-                  </div>  
-                  <div [hidden]="true">
-                      <h4>Pet Detail Updated!</h4>
-                  </div>        
-                    
-            </div>
-            
-         
-            <div class="modal-footer" >
-              <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
-            </div>
-            
-        </form>
+<!-- Modal -->
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pet Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  #UpdateForm="ngForm" (ngSubmit)="updateToPet2()">
+          <div class="form-group">
+            <label for="petId" >petId</label>
+            <input type="number" #petId [(ngModel)]="PetToupdated.petId" [ngModelOptions]="{standalone: true}" name="id" id="petId" class="form-control" placeholder="Enter petId">
           </div>
-        </div>
-      </div>-->
+          
+          <div class="form-group">
+            <label for="ownerName" >ownerName</label>
+            <input type="text"  #ownerName [(ngModel)]="PetToupdated.ownerName" [ngModelOptions]="{standalone: true}" class="form-control" id="ownerName" placeholder="Enter ownerName">
+          </div>
+          <div class="form-group">
+            <label for="petName" >petName</label>
+            <input type="text"  #petName [(ngModel)]="PetToupdated.petName" [ngModelOptions]="{standalone: true}" class="form-control" id="petName" placeholder="Enter petName">
+          </div>
+          <div class="form-group">
+            <label for="speciesId" >speciesId</label>
+            <input type="text" #speciesId [(ngModel)]="PetToupdated.speciesId" [ngModelOptions]="{standalone: true}" class="form-control" id="speciesId" placeholder="Enter speciesId">
+          </div>
+          <div class="form-group">
+            <label for="petSpecies" >petSpecies</label>
+            <input type="text" #petSpecies [(ngModel)]="PetToupdated.petSpecies" [ngModelOptions]="{standalone: true}" class="form-control" id="email" placeholder="Enter petSpecies">
+          </div>
+          <div class="form-group">
+            <label for="petSymptoms" >petSymptoms</label>
+            <input type="text" #petSymptoms [(ngModel)]="PetToupdated.petSymptoms" [ngModelOptions]="{standalone: true}" class="form-control" id="mobileNumber" placeholder="Enter petSymptoms">
+          </div>
+          
+          
+          <div class="form-group">
+            <input type="submit" value="submit" class="btn btn-primary w-100">
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

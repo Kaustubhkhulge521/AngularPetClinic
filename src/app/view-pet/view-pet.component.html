@@ -1,0 +1,40 @@
+
+<br>
+<a routerLink="/view-Doctor" style="text-align:left;" class="nav-link"  class="btn btn-primary" >Back To Doctor</a>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h1 style="text-align: center">Pet Table</h1><br>
+      
+      <div class="row" [hidden]="!deleteMessage">
+           
+                <div class="col-sm-8"></div>
+                <div class="col-sm-4">
+                 
+                </div>
+                <div class="col-sm-4"></div>
+        </div>           
+    </div>
+
+  
+  <div class="panel-body">
+      <table  class="table table-sm" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"  >
+          <thead class="thead-light">
+              <tr>
+                <th>Sr No</th>
+                  <th>Pet Name</th>
+                  <th>Owner Name</th>
+                  <th>Pet Species</th>
+                  <th>Pet Symptoms</th>
+              </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let student of students ">
+                <td>{{student.petId}}</td>
+                <td>{{student.petName}}</td>
+                  <td>{{student.ownerName}}</td>
+                  <td>{{student.petSpecies}}</td>
+                  <td>{{student.petSymptoms}}</td>
+                  

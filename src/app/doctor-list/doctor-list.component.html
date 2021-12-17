@@ -1,0 +1,130 @@
+<!--<br>
+<a routerLink="/view-Description" style="text-align:left;" class="nav-link"  class="btn btn-primary" >Edit Pet Description</a>
+<br>
+<br>
+<a routerLink="/only-view-Pet" style="text-align:left;" class="nav-link"  class="btn btn-primary" >View Pet </a>
+-->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h1 style="text-align: center">Doctor Table</h1><br>
+      <div class="form-group">
+        <a routerLink="/view-Description" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;" class="nav-link"  class="btn btn-primary" >Edit Pet Description</a>
+
+        <a routerLink="/only-view-Pet" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;" class="nav-link"  class="btn btn-primary" >View Pet </a>
+
+        <button [disabled]="loading" data-toggle="modal" data-target="#exampleModal" (click) = "insertDoctor(student)" class="btn btn-primary" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;">
+          InsertDoctor
+      </button>
+      </div>
+      
+      <div class="row">
+           
+                <div class="col-sm-8"></div>
+                <div class="col-sm-4">
+                  <button (click)="updateStudent(student.student_id)" class='btn btn-info'
+                  data-toggle="modal" style="margin-left: 30cm; " data-target="#myModal">Add Doctor</button>
+                
+                </div>
+                <div class="col-sm-4"></div>
+        </div>           
+    </div>
+
+   <!-- <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "insertDoctor(student)">Add Doctor</button>&nbsp;
+   -->   
+    
+  
+  <div class="panel-body">
+      <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"  >
+          <thead class="thead-light">
+              <tr>
+                <th>Sr No</th>
+                  <th>Name</th>
+                  <th>Designation</th>
+                  <th>Address</th>
+                  <th>MobileNumber</th>
+                  <th>Qualification</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  
+                  <th>Action</th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let student of students ">
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                  <td>{{student.designation}}</td>
+                  <td>{{student.address}}</td>
+                  <td>{{student.mobileNumber}}</td>
+                  <td>{{student.qualification}}</td>
+                  <td>{{student.username}}</td>
+                  <td>{{student.password}}</td>
+                  
+                  
+                  <td>
+                    <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "edit(student)">Edit</button>&nbsp;
+                    <button (click)="deleteDoctor(student.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                    
+                  </td>
+                </tr> 
+          </tbody><br>
+      </table>
+  </div>
+</div> 
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Doctor Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  #UpdateForm="ngForm" (ngSubmit)="updateDoctor1()">
+          <div class="form-group">
+            <label for="id" >Id</label>
+            <input type="number" #id [(ngModel)]="studentToUpdate.id" [ngModelOptions]="{standalone: true}" name="id" id="id" class="form-control" placeholder="Enter Id">
+          </div>
+          <div class="form-group">
+            <label for="name" >Name</label>
+            <input type="text"  #name [(ngModel)]="studentToUpdate.name" [ngModelOptions]="{standalone: true}" class="form-control" id="name" placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+            <label for="designation" >designation</label>
+            <input type="text" #designation [(ngModel)]="studentToUpdate.designation" [ngModelOptions]="{standalone: true}" class="form-control" id="designation" placeholder="Enter designation">
+          </div>
+          <div class="form-group">
+            <label for="address" >address</label>
+            <input type="text" #address [(ngModel)]="studentToUpdate.address" [ngModelOptions]="{standalone: true}" class="form-control" id="address" placeholder="Enter address">
+          </div>
+          <div class="form-group">
+            <label for="mobileNumber" >mobileNumber</label>
+            <input type="text" #mobileNumber [(ngModel)]="studentToUpdate.mobileNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="mobileNumber" placeholder="Enter mobileNumber">
+          </div>
+          <div class="form-group">
+            <label for="qualification" >qualification</label>
+            <input type="text" #qualification [(ngModel)]="studentToUpdate.qualification" [ngModelOptions]="{standalone: true}" class="form-control" id="qualification" placeholder="Enter qualification">
+          </div>
+          <div class="form-group">
+            <label for="username" >username</label>
+            <input type="text" #username [(ngModel)]="studentToUpdate.username" [ngModelOptions]="{standalone: true}" class="form-control" id="username" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="password" >password</label>
+            <input type="text" #password [(ngModel)]="studentToUpdate.password" [ngModelOptions]="{standalone: true}" class="form-control" id="password" placeholder="Enter password">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="submit" class="btn btn-primary w-100">
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+

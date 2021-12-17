@@ -1,0 +1,121 @@
+
+<!--<br>
+<a routerLink="/view-pet" style="text-align:left;" class="nav-link"  class="btn btn-primary" >Edit Pet</a>
+<br>
+<br>
+<a routerLink="/only-view-Description" style="text-align:left;" class="nav-link"  class="btn btn-primary" >View Pet Description </a>
+-->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h1 style="text-align: center">Owner Table</h1><br>
+      <div class="form-group">
+        <a routerLink="/view-pet" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;" class="nav-link"  class="btn btn-primary" >Edit Pet</a>
+
+        <a routerLink="/only-view-Description" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;" class="nav-link"  class="btn btn-primary" >View Pet Description</a>
+
+      <button [disabled]="loading" data-target="#exampleModal" (click) = "insertOwner(student)" class="btn btn-primary" style="max-width: 350px; margin-left: 0.2cm; margin-bottom: 0.7cm;">
+        InsertOwner
+    </button>
+      </div>
+     
+      <!--<td> <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "insertOwner(student)">Insert Owner</button>&nbsp;
+
+      -->
+  <div class="panel-body">
+      <table  style = "width: 32cm;" class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"  >
+          <thead class="thead-light">
+              <tr>
+                <th>Sr No</th>
+              
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Mobile Number</th>
+                  <th>Note</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                 <th>Action</th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let student of students ">
+                <td>{{student.id}}</td>
+                <td>{{student.firstName}}</td>
+                  <td>{{student.lastName}}</td>
+                  <td>{{student.email}}</td>
+                  <td>{{student.mobileNumber}}</td>
+                  <td>{{student.note}}</td>
+                  <td>{{student.username}}</td>
+                  <td>{{student.password}}</td>
+                  
+                  
+                  
+                  <td>
+                    <button  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "edit(student)">Edit</button>&nbsp;
+                    <button (click)="deleteOwner(student.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                    
+                  </td>
+                </tr>
+          </tbody><br>
+      </table>
+  </div>
+</div> 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Owner Details</h5>
+
+       
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form  #UpdateForm="ngForm" (ngSubmit)="updateOwner2()">
+          <div class="form-group">
+            <label for="id" >Id</label>
+            <input type="number" #id [(ngModel)]="ownerToUpdate.id" [ngModelOptions]="{standalone: true}" name="id" id="id" class="form-control" placeholder="Enter Id">
+          </div>
+          <div class="form-group">
+            <label for="firstName" >firstName</label>
+            <input type="text"  #firstName [(ngModel)]="ownerToUpdate.firstName" [ngModelOptions]="{standalone: true}" class="form-control" id="firstName" placeholder="Enter firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName" >lastName</label>
+            <input type="text" #lastName [(ngModel)]="ownerToUpdate.lastName" [ngModelOptions]="{standalone: true}" class="form-control" id="lastName" placeholder="Enter lastName">
+          </div>
+          <div class="form-group">
+            <label for="email" >email</label>
+            <input type="text" #address [(ngModel)]="ownerToUpdate.email" [ngModelOptions]="{standalone: true}" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="mobileNumber" >mobileNumber</label>
+            <input type="text" #mobileNumber [(ngModel)]="ownerToUpdate.mobileNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="mobileNumber" placeholder="Enter mobileNumber">
+          </div>
+          <div class="form-group">
+            <label for="note" >note</label>
+            <input type="text" #note [(ngModel)]="ownerToUpdate.note" [ngModelOptions]="{standalone: true}" class="form-control" id="note" placeholder="Enter note">
+          </div>
+          <div class="form-group">
+            <label for="username" >username</label>
+            <input type="text" #username [(ngModel)]="ownerToUpdate.username" [ngModelOptions]="{standalone: true}" class="form-control" id="username" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="password" >password</label>
+            <input type="text" #password [(ngModel)]="ownerToUpdate.password" [ngModelOptions]="{standalone: true}" class="form-control" id="password" placeholder="Enter password">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="submit" class="btn btn-primary w-100">
+          </div>
+        </form>
+      
+      
+    </div>
+  </div>
+</div>
+

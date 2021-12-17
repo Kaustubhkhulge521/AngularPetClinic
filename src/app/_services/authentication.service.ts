@@ -19,21 +19,11 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        console.log("p"+password+"u"+username);
-        return this.http.get<any>(`${this.baseUrl}`+'user-validation'+'?username='+username +'&password='+password)
-            //.pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                // if (user && user.token) {
-                //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                //     localStorage.setItem('currentUser', JSON.stringify(user));
-                //     this.currentUserSubject.next(user);
-                // }
-
-             //   return user;
-            //}
-            //)
-            //);
+    login(username: string, password: string,logger: string) {
+        console.log("p"+password+"u"+username+logger);
+      
+            return this.http.get(`${this.baseUrl}`+'user-validation'+'?username='+username +'&password='+password+'&logger='+logger,{responseType: 'text'});
+       
     }
 
     logout() {
