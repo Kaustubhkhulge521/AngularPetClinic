@@ -22,6 +22,6 @@ public interface PetService {
 	PetEntity petUpdate(PetRequest petRequest);
 
 	List<PetEntity> findPetByusername(String username);
-	
+
 
 }

@@ -21,9 +21,10 @@ public class PetServiceImpl implements PetService {
 
 	@Autowired
 	PetRepository petRepository;
-	
+
+
 	private static Logger logger = LogManager.getLogger(PetServiceImpl.class);
-	
+
 
 	// This method insert the record into Pet Table
 	@Override
@@ -45,7 +46,7 @@ public class PetServiceImpl implements PetService {
 		else
 			throw new Error("OwnerName must include only a-z OR A-Z");
 		petEntity.setSpeciesId(petRequest.getSpeciesId());
-		String petSpecies =petRequest.getPetSpecies();
+		String petSpecies = petRequest.getPetSpecies();
 		Pattern patrPetSpecies = Pattern.compile("^[a-zA-Z][a-zA-Z0-9 ]*$");
 		Matcher matchPetSpecies = patrPetSpecies.matcher(petSpecies);
 		if (matchPetSpecies.find() && matchPetSpecies.group().equals(petSpecies))
@@ -63,7 +64,7 @@ public class PetServiceImpl implements PetService {
 
 		petEntity.setDelete(false);
 		petRepository.save(petEntity);
-		logger.debug("pet record is: "+petEntity);
+		logger.debug("pet record is: " + petEntity);
 		return petEntity;
 	}
 
@@ -76,11 +77,10 @@ public class PetServiceImpl implements PetService {
 			petEntity.setDelete(true);
 		}
 		petRepository.save(petEntity);
-		logger.debug("Pet deleted isDelete status is: "+petEntity.isDelete());
+		logger.debug("Pet deleted isDelete status is: " + petEntity.isDelete());
 		return "Pet deleted successfully";
 	}
 
-	
 
 	// This method will update pet record into pet Table
 	@Override
@@ -98,7 +98,7 @@ public class PetServiceImpl implements PetService {
 			else
 				throw new Error("PetName must include only a-z OR A-Z");
 		}
-		
+
 		String username = petRequest.getUsername();
 		if (username != null) {
 			Pattern patternOwnerName = Pattern.compile("^[a-zA-Z][a-zA-Z ]*$");
@@ -110,33 +110,31 @@ public class PetServiceImpl implements PetService {
 		}
 		if (petRequest.getSpeciesId() != 0)
 			petEntity.setSpeciesId(petRequest.getSpeciesId());
-		
+
 		String petSpecies = petRequest.getPetSpecies();
-		if (petSpecies != null)
-		{
+		if (petSpecies != null) {
 			Pattern patternPetSpecies = Pattern.compile("^[a-zA-Z][a-zA-Z0-9 ]*$");
 			Matcher matchPetSpecies = patternPetSpecies.matcher(petSpecies);
 			if (matchPetSpecies.find() && matchPetSpecies.group().equals(petSpecies))
 				petEntity.setPetSpecies(petSpecies);
 			else
 				throw new Error("PetSpecies must include only a-z OR A-Z OR 0-9");
-			
+
 		}
-		
+
 		String petSymptoms = petRequest.getPetSymptoms();
-		if (petSymptoms != null)
-		{
+		if (petSymptoms != null) {
 			Pattern patternPetSymptoms = Pattern.compile("^[a-zA-Z][a-zA-Z ]*$");
 			Matcher matchPetSymptoms = patternPetSymptoms.matcher(petSymptoms);
 			if (matchPetSymptoms.find() && matchPetSymptoms.group().equals(petSymptoms))
 				petEntity.setPetSymptoms(petSymptoms);
 			else
 				throw new Error("PetSymptoms must include only a-z OR A-Z");
-			
+
 		}
 		petEntity.setDelete(false);
 		petEntity = petRepository.save(petEntity);
-		logger.debug("updated pet is: "+ petEntity);
+		logger.debug("updated pet is: " + petEntity);
 		return petEntity;
 	}
 
@@ -144,7 +142,7 @@ public class PetServiceImpl implements PetService {
 	@Override
 	public Optional<PetEntity> getPetById(Integer petId) {
 		Optional<PetEntity> petEntity = petRepository.findById(petId);
-		logger.debug("pet Id is : "+ petId);
+		logger.debug("pet Id is : " + petId);
 		return petEntity;
 	}
 
@@ -166,7 +164,7 @@ public class PetServiceImpl implements PetService {
 		petEntity.setSpeciesId(petRequest.getSpeciesId());
 		petEntity.setPetSymptoms(petRequest.getPetSymptoms());
 		petRepository.save(petEntity);
-		logger.debug("updated pet is: "+ petEntity);
+		logger.debug("updated pet is: " + petEntity);
 		return petEntity;
 	}
 

@@ -7,12 +7,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Entity
 @ToString
 //This class is response entity class which is used to create table in database with all provided variable as column.
-public class Doctor {
+public class Doctor implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;

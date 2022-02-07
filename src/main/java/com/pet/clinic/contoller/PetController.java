@@ -1,9 +1,13 @@
 package com.pet.clinic.contoller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import com.pet.clinic.dto.OwnerPet;
 import com.pet.clinic.entity.OwnerEntity;
+import com.pet.clinic.repository.OwnerRepository;
+import com.pet.clinic.repository.PetRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +36,20 @@ public class PetController {
 
 	@Autowired
 	PetService petService;
+
+	@Autowired
+	PetRepository petRepository;
+
+	@Autowired
+	OwnerRepository ownerRepository;
 	
 	private static Logger logger = LogManager.getLogger(PetController.class);
 	
 
 	//This method is used to call addPet() method from PetService class which  insert the record  into pet table
-	@PostMapping("pet")
+	@PostMapping("/pet")
 	public ResponseEntity<PetEntity> addPet(@RequestBody PetRequest petRequest) {
+		System.out.println("Data"+petRequest);
 		logger.debug("Enter in addPet() method");
 		return new ResponseEntity<PetEntity>((PetEntity) petService.addPet(petRequest), HttpStatus.OK);
 	}
@@ -90,5 +101,32 @@ public class PetController {
 		logger.debug("In getPetList method ");
 		//return ownerService.findAll();
 		return  petService.findPetByusername(username);
+	}
+
+
+
+	@GetMapping("/Get-ownerPetData")
+	public  List<Map<String,String>> getAllPetOwnerData(){
+		return petRepository.findAllDataFromPetAndOwner();
+	}
+
+	@PutMapping("/update-petOwner/{id}")
+	public OwnerPet updateAllData(@RequestBody OwnerPet ownerPet, @PathVariable Integer id){
+		OwnerEntity owner = ownerRepository.getById(id);
+		owner.setId(id);
+		owner.setOwnerName(ownerPet.getOwnerName());
+		owner.setEmail(ownerPet.getEmail());
+		owner.setMobileNumber(ownerPet.getMobileNumber());
+		owner.setNote(ownerPet.getNote());
+		owner.setUsername(ownerPet.getUsername());
+		ownerRepository.save(owner);
+
+		PetEntity pet =petRepository.findById(id).get();
+		pet.setPetName(ownerPet.getPetName());
+		pet.setSpeciesId(ownerPet.getSpeciesId());
+		pet.setPetSpecies(ownerPet.getPetSpecies());
+		pet.setPetSymptoms(ownerPet.getPetSymptoms());
+		petRepository.save(pet);
+		return ownerPet;
 	}
 }

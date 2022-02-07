@@ -50,7 +50,7 @@ class PetClinicOwnerServiceTest {
         ownerRequest.setMobileNumber("9867400939");
         ownerRequest.setNote("hello");
         ownerRequest.setDelete(false);
-        ownerRequest.setUsername("username");
+        ownerRequest.setOwnerName("owername");
         ownerRequest.setPassword("password");
         return ownerRequest;
     }

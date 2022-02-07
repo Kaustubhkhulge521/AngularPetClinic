@@ -1,7 +1,6 @@
 package com.pet.clinic.configuration;
 import java.util.Collection;
 import com.pet.clinic.entity.Doctor;
-import com.pet.clinic.entity.OwnerEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;

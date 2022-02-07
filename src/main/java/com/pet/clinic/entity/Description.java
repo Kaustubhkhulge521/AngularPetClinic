@@ -12,7 +12,6 @@ public class Description {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
 	private int petId;
 	@Column(name = "petName")
 	private String petName;

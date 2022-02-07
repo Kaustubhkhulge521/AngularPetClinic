@@ -17,6 +17,8 @@ import com.pet.clinic.entity.Doctor;
 import com.pet.clinic.repository.DoctorRepo;
 import com.pet.clinic.service.DoctorServiceImpl;
 
+import java.util.List;
+
 @RunWith(MockitoJUnitRunner.class)
 
 @SpringBootTest
@@ -67,6 +69,8 @@ public class PetClinicServiceImplTest {
 		doctor.setQualification(doctorRegistrationRequest.getQualification());
 		doctor.setAddress(doctorRegistrationRequest.getAddress());
 		doctor.setMobileNumber(doctorRegistrationRequest.getMobileNumber());
+		doctor.setUsername(doctorRegistrationRequest.getUsername());
+		doctor.setPassword(doctorRegistrationRequest.getPassword());
 		doctor.setDelete(false);
 		doctorRepo.save(doctor);
 		return doctor;
@@ -110,6 +114,43 @@ public class PetClinicServiceImplTest {
 		doctor = doctorRepo.save(doctor);
 		doctorServiceImpl.doctorUpdate(doctorRegistrationRequest, id);
 
+	}
+
+	@Test
+	public void test_findByDoctorsName(){
+		String username = "username";
+		Doctor doctor = dummyDoctor();
+		List<Doctor> response = doctorServiceImpl.findbyDoctorname(username);
+		when(doctorRepo.findbyDoctorname(username)).thenReturn(response);
+		assertNotNull(response);
+	}
+
+//	@Test
+//	public void test_doctorUsername(){
+//		String username = "username";
+//		Doctor doctor = dummyDoctor();
+//		String response = doctorServiceImpl.doctorUsername(username);
+//		when(doctorRepo.findDoctorUsername(username)).thenReturn(response);
+//		assertNotNull(response);
+//	}
+
+	@Test
+	public void test_doctorUsername(){
+		String username = "username";
+		Doctor doctor = dummyDoctor();
+		String response = doctorServiceImpl.doctorUsername(username);
+		when(doctorRepo.findDoctorUsername(username)).thenReturn(response);
+		//assertNotNull(response);
+	}
+
+	@Test
+	public void test_doctorUpdate(){
+		Doctor doctor = dummyDoctor();
+		DoctorRegistrationRequest doctorRegistrationRequest = dummyDoctorRegistrationRequest();
+		when(doctorRepo.save(doctor)).thenReturn(doctor);
+		Doctor response = doctorServiceImpl.doctorUpdate(doctorRegistrationRequest);
+		//assertEquals(dummyDoctor(),response);
+		//assertNotNull(response);
 	}
 
 }

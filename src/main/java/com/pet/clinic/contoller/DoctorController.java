@@ -2,6 +2,8 @@ package com.pet.clinic.contoller;
 
 import java.util.List;
 
+import com.pet.clinic.dto.OwnerPet;
+import com.pet.clinic.entity.OwnerEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,7 @@ public class DoctorController {
 		return doctorService.doctorDeleteById(id);
 	}
 
-	@PatchMapping("doctors/{id}")
+	@PutMapping("/doctors/{id}")
 //This method is used to call the doctorUpdate method in service class which is used to update doctor's record if necessary.	
 	public Doctor updateDoctor(@RequestBody DoctorRegistrationRequest doctorRegistrationRequest, @PathVariable int id) {
 		logger.debug("Patch method in doctor controller");
@@ -75,12 +77,12 @@ public class DoctorController {
 	}
 	
 	
-	@PutMapping("doctors")
-	public Doctor updateDoctor(@RequestBody DoctorRegistrationRequest doctorRegistrationRequest){
-		logger.debug("fullUpdate method in doctor controller");
-		return doctorService.doctorUpdate(doctorRegistrationRequest);
-		
-	}
+//	@PutMapping("doctors")
+//	public Doctor updateDoctor(@RequestBody DoctorRegistrationRequest doctorRegistrationRequest){
+//		logger.debug("fullUpdate method in doctor controller");
+//		return doctorService.doctorUpdate(doctorRegistrationRequest);
+//
+//	}
 
 
 	@GetMapping("/doctor-username/{username}")
@@ -93,6 +95,7 @@ public class DoctorController {
 	public Object getDoctorByUsername(@PathVariable String username){
 		return doctorService.getByUsername(username);
 	}
+
 
 
 }
